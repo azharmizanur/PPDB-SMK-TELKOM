@@ -1,0 +1,205 @@
+
+/* =========================================
+   STYLE.CSS - WEBSITE PPDB SMK TELKOM
+   ========================================= */
+
+/* Pengaturan dasar */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: #F8FAFC;
+    color: #0F172A;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Pengaturan font */
+.font-display {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Warna utama */
+:root {
+    --telkom-red: #D91B24;
+    --telkom-dark: #0F172A;
+    --telkom-slate: #334155;
+    --telkom-soft: #F8FAFC;
+}
+
+/* Offset scroll */
+section[id] {
+    scroll-margin-top: 84px;
+}
+
+/* Animasi */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #E2E8F0;
+}
+
+/* Navigasi */
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--telkom-red);
+    background-color: #FEF2F2;
+}
+
+/* Tombol */
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+button,
+a,
+article {
+    transition: all 0.3s ease;
+}
+
+/* Kartu */
+article {
+    border-radius: 24px;
+}
+
+article:hover {
+    transform: translateY(-4px);
+}
+
+/* Formulir */
+input,
+select,
+textarea {
+    width: 100%;
+    font-family: inherit;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--telkom-red);
+    box-shadow: 0 0 0 3px rgba(217, 27, 36, 0.12);
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--telkom-red);
+}
+
+/* Tombol filter prestasi */
+.achievement-filter {
+    transition: all 0.25s ease;
+}
+
+/* Modal konfirmasi */
+#confirmationModal {
+    transition: opacity 0.3s ease;
+}
+
+#confirmationModal > div {
+    animation: fadeUp 0.35s ease-out;
+}
+
+/* Footer */
+footer {
+    background-color: #020617;
+}
+
+/* Seleksi teks */
+::selection {
+    background-color: var(--telkom-red);
+    color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--telkom-red);
+}
+
+/* Tampilan tablet */
+@media (max-width: 1024px) {
+    section {
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+}
+
+/* Tampilan HP */
+@media (max-width: 640px) {
+    section[id] {
+        scroll-margin-top: 75px;
+    }
+
+    h1 {
+        line-height: 1.2;
+    }
+
+    article:hover {
+        transform: none;
+    }
+
+    #mobileMenu {
+        padding-bottom: 16px;
+    }
+}
+
+/* Mengurangi animasi jika diminta pengguna */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

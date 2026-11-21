@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPDB SMK Telkom — Pendaftaran Siswa Baru &amp; Informasi Sekolah</title>
+
+   <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS External -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            telkomRed: '#D91B24',
+            telkomDark: '#0F172A',
+            telkomSlate: '#334155',
+            telkomSoft: '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Penyesuaian offset scroll agar tidak tertutup header sticky */
+    section[id] {
+      scroll-margin-top: 84px;
+    }
+
+    /* Animasi halus kartu dan modal */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-telkomSoft text-telkomDark font-sans antialiased selection:bg-telkomRed selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- HEADER NAVIGASI & LOGO SMK TELKOM                                     -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-18 sm:h-20 flex items-center justify-between gap-4">
+
+        <!-- Logo SMK Telkom (SVG Kustom Bergaya Logo Telkom) -->
+        <a
+          href="#beranda"
+          onclick="setActiveNav('beranda')"
+          class="flex items-center gap-3 group shrink-0 focus:outline-none"
+        >
+          <div class="w-11 h-11 rounded-xl bg-telkomRed text-white flex items-center justify-center shadow-md shadow-telkomRed/25 group-hover:scale-105 transition">
+            <svg viewBox="0 0 48 48" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Lingkaran/Simbol Tangan & Titik Sinyal Bergaya Telkom -->
+              <circle cx="33" cy="13" r="4.5" fill="#FFFFFF" />
+              <path
+                d="M14 23C14 17.4772 18.4772 13 24 13"
+                stroke="#FFFFFF"
+                stroke-width="3.4"
+                stroke-linecap="round"
+              />
+              <path
+                d="M13 33C13 26.9249 17.9249 22 24 22H29C31.7614 22 34 24.2386 34 27V35C34 36.6569 32.6569 38 31 38H18C15.2386 38 13 35.7614 13 33Z"
+                fill="#FFFFFF"
+              />
+              <circle cx="21" cy="30" r="2" fill="#D91B24" />
+              <circle cx="27" cy="30" r="2" fill="#D91B24" />
+            </svg>
+          </div>
+          <div class="leading-tight">
+            <div class="flex items-center gap-1.5">
+              <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-telkomDark">
+                SMK <span class="text-telkomRed">TELKOM</span>
+              </span>
+              <span class="hidden md:inline-block px-2 py-0.5 text-[10px] font-bold uppercase rounded-full bg-red-50 text-telkomRed border border-red-200">
+                PPDB
+              </span>
+            </div>
+            <p class="text-[11px] sm:text-xs font-medium text-slate-500">
+              Sekolah Vokasi Teknologi &amp; Informatika
+            </p>
+          </div>
+        </a>
+
+        <!-- Menu Navigasi Desktop -->
+        <nav aria-label="Navigasi Utama" class="hidden xl:flex items-center gap-1">
+          <a
+            href="#beranda"
+            data-nav="beranda"
+            onclick="setActiveNav('beranda')"
+            class="nav-link px-3.5 py-2 rounded-xl text-sm font-semibold text-telkomRed bg-red-50 transition"
+          >
+            Beranda
+          </a>
+          <a
+            href="#visi-misi"
+            data-nav="visi-misi"
+            onclick="setActiveNav('visi-misi')"
+            class="nav-link px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-telkomRed hover:bg-red-50/70 transition"
+          >
+            Visi Misi Sekolah
+          </a>
+          <a
+            href="#prestasi"
+            data-nav="prestasi"
+            onclick="setActiveNav('prestasi')"
+            class="nav-link px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-telkomRed hover:bg-red-50/70 transition"
+          >
+            Prestasi dan Lomba
+          </a>
+          <a
+            href="#profil"
+            data-nav="profil"
+            onclick="setActiveNav('profil')"
+            class="nav-link px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-telkomRed hover:bg-red-50/70 transition"
+          >
+            Profil Sekolah
+          </a>
+          <a
+            href="#jurusan"
+            data-nav="jurusan"
+            onclick="setActiveNav('jurusan')"
+            class="nav-link px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-telkomRed hover:bg-red-50/70 transition"
+          >
+            Program Jurusan
+          </a>
+        </nav>
+
+        <!-- Tombol Aksi Daftar & Tombol Menu Mobile -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="#pendaftaran"
+            onclick="setActiveNav('pendaftaran')"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-telkomRed hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-sm shadow-telkomRed/30 transition active:scale-[0.98]"
+          >
+            <i data-lucide="user-plus" class="w-4 h-4"></i>
+            <span>Daftar PPDB</span>
+          </a>
+
+          <button
+            id="mobileMenuBtn"
+            type="button"
+            onclick="toggleMobileMenu()"
+            aria-label="Buka Menu Navigasi"
+            aria-expanded="false"
+            class="xl:hidden p-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+          >
+            <i id="mobileMenuIcon" data-lucide="menu" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menu Navigasi Mobile & Tablet -->
+      <div id="mobileMenu" class="hidden xl:hidden pb-4 pt-2 border-t border-slate-100">
+        <div class="flex flex-col gap-1">
+          <a
+            href="#beranda"
+            data-nav="beranda"
+            onclick="handleMobileNavClick('beranda')"
+            class="nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-telkomRed bg-red-50"
+          >
+            Beranda
+          </a>
+          <a
+            href="#visi-misi"
+            data-nav="visi-misi"
+            onclick="handleMobileNavClick('visi-misi')"
+            class="nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Visi Misi Sekolah
+          </a>
+          <a
+            href="#prestasi"
+            data-nav="prestasi"
+            onclick="handleMobileNavClick('prestasi')"
+            class="nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Prestasi dan Lomba
+          </a>
+          <a
+            href="#profil"
+            data-nav="profil"
+            onclick="handleMobileNavClick('profil')"
+            class="nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Profil Sekolah
+          </a>
+          <a
+            href="#jurusan"
+            data-nav="jurusan"
+            onclick="handleMobileNavClick('jurusan')"
+            class="nav-link px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Program Jurusan (RPL, TKJ, PG)
+          </a>
+          <a
+            href="#pendaftaran"
+            data-nav="pendaftaran"
+            onclick="handleMobileNavClick('pendaftaran')"
+            class="mt-1 px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-telkomRed text-center"
+          >
+            Formulir Pendaftaran PPDB
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================================================================== -->
+    <!-- 1. BERANDA & AJAKAN PENDAFTARAN (PPDB)                                -->
+    <!-- ===================================================================== -->
+    <section id="beranda" class="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-red-950 text-white">
+      <!-- Dekorasi Cahaya Latar -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-telkomRed/25 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-28 -left-24 w-96 h-96 rounded-full bg-red-600/15 blur-3xl pointer-events-none"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Kolom Kiri: Ajakan PPDB -->
+          <div class="lg:col-span-7 space-y-6 animate-fade-up">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold text-red-200">
+              <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+              <span>Penerimaan Peserta Didik Baru (PPDB) Telah Dibuka</span>
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight leading-[1.12]">
+              Wujudkan Masa Depan Digital Bersama <span class="text-red-400">SMK Telkom</span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+              Bergabunglah dengan sekolah kejuruan teknologi informasi unggulan yang membekali siswa dengan keterampilan industri modern pada bidang
+              <strong class="text-white">Rekayasa Perangkat Lunak (RPL)</strong>,
+              <strong class="text-white">Teknik Komputer dan Jaringan (TKJ)</strong>, dan
+              <strong class="text-white">Perangkat Gim (PG)</strong>.
+            </p>
+
+            <!-- Tombol Ajakan Utama -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-1">
+              <a
+                href="#pendaftaran"
+                class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-telkomRed hover:bg-red-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-telkomRed/35 transition active:scale-[0.98]"
+              >
+                <span>Daftar Sekarang</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a
+                href="#jurusan"
+                class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-sm sm:text-base transition"
+              >
+                <i data-lucide="layers" class="w-4 h-4 text-red-300"></i>
+                <span>Lihat Program Jurusan</span>
+              </a>
+            </div>
+
+            <!-- Statistik Singkat -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-5 pt-4 border-t border-white/10 max-w-xl">
+              <div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">A</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Akreditasi Unggul</p>
+              </div>
+              <div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-red-400">3</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Kompetensi Keahlian</p>
+              </div>
+              <div>
+                <p class="font-display text-2xl sm:text-3xl font-extrabold text-white">95%+</p>
+                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Keterserapan &amp; Studi</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Kartu Info Cepat PPDB -->
+          <div class="lg:col-span-5">
+            <div class="bg-white/95 text-telkomDark rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/20">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                  <span class="text-xs font-bold uppercase tracking-wider text-telkomRed">Informasi PPDB</span>
+                  <h2 class="font-display text-xl font-extrabold text-telkomDark mt-0.5">Jalur &amp; Keunggulan</h2>
+                </div>
+                <div class="w-11 h-11 rounded-2xl bg-red-50 text-telkomRed flex items-center justify-center">
+                  <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <ul class="divide-y divide-slate-100 my-4 text-sm">
+                <li class="py-3 flex items-start gap-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-telkomRed shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-bold text-telkomDark">Kurikulum Berbasis Industri &amp; Praktik</p>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Pembelajaran proyek nyata, sertifikasi kompetensi, dan magang industri.</p>
+                  </div>
+                </li>
+                <li class="py-3 flex items-start gap-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-telkomRed shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-bold text-telkomDark">Laboratorium Komputer, Jaringan &amp; Studio Gim</p>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Fasilitas praktik terstandar untuk coding, infrastruktur jaringan, dan game dev.</p>
+                  </div>
+                </li>
+                <li class="py-3 flex items-start gap-3">
+                  <i data-lucide="check-circle-2" class="w-5 h-5 text-telkomRed shrink-0 mt-0.5"></i>
+                  <div>
+                    <p class="font-bold text-telkomDark">Pembinaan Prestasi &amp; Kompetisi Nasional</p>
+                    <p class="text-slate-600 text-xs sm:text-sm mt-0.5">Didukung mentor lomba pemrograman, keamanan siber, robotika, dan gim.</p>
+                  </div>
+                </li>
+              </ul>
+
+              <a
+                href="#pendaftaran"
+                class="w-full py-3 px-4 rounded-xl bg-telkomDark hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 transition"
+              >
+                <span>Isi Formulir Pendaftaran</span>
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 2. VISI MISI SEKOLAH                                                  -->
+    <!-- ===================================================================== -->
+    <section id="visi-misi" class="py-16 sm:py-20 bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center mb-12">
+          <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold uppercase tracking-wider mb-3">
+            Arah &amp; Tujuan Pendidikan
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-telkomDark tracking-tight">
+            Visi &amp; Misi SMK Telkom
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Membentuk lulusan berkarakter unggul, berwawasan digital, dan siap berkarya di tingkat nasional maupun global.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <!-- Kartu Visi -->
+          <div class="lg:col-span-5 bg-gradient-to-br from-telkomRed to-red-700 text-white rounded-3xl p-7 sm:p-8 flex flex-col justify-between shadow-lg shadow-telkomRed/20">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center mb-5">
+                <i data-lucide="eye" class="w-6 h-6 text-white"></i>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-widest text-red-100">Visi Sekolah</span>
+              <h3 class="font-display text-xl sm:text-2xl font-extrabold mt-2 mb-4">
+                Menjadi Sekolah Kejuruan ICT Unggul &amp; Berkarakter
+              </h3>
+              <blockquote class="text-red-50 text-sm sm:text-base leading-relaxed border-l-4 border-white/40 pl-4">
+                &ldquo;Menjadi SMK bidang Teknologi Informasi dan Komunikasi yang unggul dalam prestasi, berkarakter luhur, adaptif terhadap perkembangan teknologi, serta berdaya saing global.&rdquo;
+              </blockquote>
+            </div>
+
+            <div class="mt-8 pt-5 border-t border-white/15 flex items-center gap-2 text-xs sm:text-sm text-red-100 font-medium">
+              <i data-lucide="sparkles" class="w-4 h-4 shrink-0"></i>
+              <span>Berintegritas • Inovatif • Kolaboratif</span>
+            </div>
+          </div>
+
+          <!-- Kartu Misi -->
+          <div class="lg:col-span-7 bg-slate-50 rounded-3xl p-7 sm:p-8 border border-slate-200/80">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-11 h-11 rounded-2xl bg-red-100 text-telkomRed flex items-center justify-center">
+                <i data-lucide="target" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-telkomRed">Misi Sekolah</span>
+                <h3 class="font-display text-xl font-extrabold text-telkomDark">Langkah Strategis Kami</h3>
+              </div>
+            </div>
+
+            <ol class="space-y-4">
+              <li class="flex items-start gap-3.5 bg-white p-4 rounded-2xl border border-slate-200/70">
+                <span class="w-7 h-7 rounded-lg bg-telkomRed text-white font-display font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  01
+                </span>
+                <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Menyelenggarakan pendidikan vokasi berbasis teknologi informasi dan proyek industri yang relevan dengan kebutuhan dunia kerja.
+                </p>
+              </li>
+              <li class="flex items-start gap-3.5 bg-white p-4 rounded-2xl border border-slate-200/70">
+                <span class="w-7 h-7 rounded-lg bg-telkomRed text-white font-display font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  02
+                </span>
+                <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Menanamkan nilai etika digital, kedisiplinan, kepemimpinan, serta budaya kerja profesional pada seluruh peserta didik.
+                </p>
+              </li>
+              <li class="flex items-start gap-3.5 bg-white p-4 rounded-2xl border border-slate-200/70">
+                <span class="w-7 h-7 rounded-lg bg-telkomRed text-white font-display font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  03
+                </span>
+                <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Mendorong inovasi, kreativitas, dan prestasi siswa melalui kompetisi akademik, pengembangan perangkat lunak/gim, dan kegiatan ekstrakurikuler.
+                </p>
+              </li>
+              <li class="flex items-start gap-3.5 bg-white p-4 rounded-2xl border border-slate-200/70">
+                <span class="w-7 h-7 rounded-lg bg-telkomRed text-white font-display font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  04
+                </span>
+                <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Memperkuat kemitraan strategis dengan industri teknologi, perguruan tinggi, serta komunitas profesional untuk membuka peluang karier dan studi lanjut.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 3. PRESTASI DAN LOMBA                                                -->
+    <!-- ===================================================================== -->
+    <section id="prestasi" class="py-16 sm:py-20 bg-telkomSoft border-b border-slate-200/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold uppercase tracking-wider mb-3">
+              Jejak Juara Siswa
+            </span>
+            <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-telkomDark tracking-tight">
+              Prestasi &amp; Lomba Sekolah
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl">
+              Bukti nyata dedikasi siswa SMK Telkom di berbagai ajang kompetisi akademik, teknologi informasi, maupun non-akademik.
+            </p>
+          </div>
+
+          <!-- Filter Kategori Prestasi -->
+          <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter Prestasi">
+            <button
+              type="button"
+              data-filter="Semua"
+              onclick="filterAchievements('Semua')"
+              class="achievement-filter px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-telkomRed text-white shadow-xs transition cursor-pointer"
+            >
+              Semua Prestasi
+            </button>
+            <button
+              type="button"
+              data-filter="Akademik & Lomba"
+              onclick="filterAchievements('Akademik & Lomba')"
+              class="achievement-filter px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-telkomRed hover:text-telkomRed transition cursor-pointer"
+            >
+              Akademik &amp; Lomba
+            </button>
+            <button
+              type="button"
+              data-filter="Non-Akademik"
+              onclick="filterAchievements('Non-Akademik')"
+              class="achievement-filter px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-telkomRed hover:text-telkomRed transition cursor-pointer"
+            >
+              Non-Akademik
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid Kartu Prestasi -->
+        <div id="achievementsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dirender melalui JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 4. PROFIL SEKOLAH                                                     -->
+    <!-- ===================================================================== -->
+    <section id="profil" class="py-16 sm:py-20 bg-white border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+          <!-- Kolom Narasi Profil Sekolah -->
+          <div class="lg:col-span-7 space-y-5">
+            <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold uppercase tracking-wider">
+              Tentang Kami
+            </span>
+            <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-telkomDark tracking-tight">
+              Profil SMK Telkom
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              SMK Telkom merupakan lembaga pendidikan menengah kejuruan yang berfokus pada pengembangan talenta digital di bidang teknologi informasi dan komunikasi. Dengan pendekatan pembelajaran berbasis praktik, proyek kolaboratif, serta bimbingan guru berpengalaman, siswa dipersiapkan untuk menjadi tenaga profesional maupun wirausaha muda kreatif.
+            </p>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Lingkungan belajar yang kondusif, fasilitas laboratorium modern, serta ekosistem ekstrakurikuler yang aktif membantu siswa menyeimbangkan kecerdasan teknis, kemampuan komunikasi, dan karakter kepemimpinan.
+            </p>
+
+            <!-- Poin Unggulan Profil -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-100 text-telkomRed flex items-center justify-center shrink-0">
+                  <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-telkomDark">Lab Praktik Terstandar</h3>
+                  <p class="text-xs text-slate-600 mt-0.5">Lab pemrograman, jaringan komputer, dan studio pengembangan gim.</p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-100 text-telkomRed flex items-center justify-center shrink-0">
+                  <i data-lucide="briefcase" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-telkomDark">Pembelajaran Berbasis Proyek</h3>
+                  <p class="text-xs text-slate-600 mt-0.5">Membangun portofolio aplikasi, infrastruktur jaringan, dan gim sejak dini.</p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-100 text-telkomRed flex items-center justify-center shrink-0">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-telkomDark">Pembina &amp; Mentor Kompeten</h3>
+                  <p class="text-xs text-slate-600 mt-0.5">Pendampingan intensif untuk akademik, sertifikasi, dan lomba.</p>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-red-100 text-telkomRed flex items-center justify-center shrink-0">
+                  <i data-lucide="award" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-sm text-telkomDark">Pengembangan Soft Skills</h3>
+                  <p class="text-xs text-slate-600 mt-0.5">Melatih public speaking, kerja tim, manajemen waktu, dan kepemimpinan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Ringkasan Data Sekolah -->
+          <div class="lg:col-span-5">
+            <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-telkomRed flex items-center justify-center">
+                  <i data-lucide="building-2" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-extrabold">Identitas Singkat Sekolah</h3>
+                  <p class="text-xs text-slate-400">SMK Telkom • Pendidikan Vokasi ICT</p>
+                </div>
+              </div>
+
+              <dl class="space-y-4 text-sm">
+                <div class="flex items-center justify-between py-2.5 border-b border-white/10">
+                  <dt class="text-slate-400">Status Sekolah</dt>
+                  <dd class="font-bold text-white">SMK Unggulan Teknologi</dd>
+                </div>
+                <div class="flex items-center justify-between py-2.5 border-b border-white/10">
+                  <dt class="text-slate-400">Program Keahlian</dt>
+                  <dd class="font-bold text-red-400">RPL • TKJ • PG</dd>
+                </div>
+                <div class="flex items-center justify-between py-2.5 border-b border-white/10">
+                  <dt class="text-slate-400">Masa Pendidikan</dt>
+                  <dd class="font-bold text-white">3 Tahun (6 Semester)</dd>
+                </div>
+                <div class="flex items-center justify-between py-2.5">
+                  <dt class="text-slate-400">Fokus Pembelajaran</dt>
+                  <dd class="font-bold text-white text-right">Praktik Industri &amp; Portofolio</dd>
+                </div>
+              </dl>
+
+              <a
+                href="#pendaftaran"
+                class="w-full py-3 px-4 rounded-xl bg-telkomRed hover:bg-red-600 text-white font-bold text-sm flex items-center justify-center gap-2 transition"
+              >
+                <span>Bergabung Bersama Kami</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 5. PROGRAM JURUSAN (RPL, TKJ, DAN PG)                                 -->
+    <!-- ===================================================================== -->
+    <section id="jurusan" class="py-16 sm:py-20 bg-telkomSoft border-b border-slate-200/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center mb-12">
+          <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold uppercase tracking-wider mb-3">
+            Kompetensi Keahlian
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-telkomDark tracking-tight">
+            Program Jurusan Unggulan
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-3">
+            Pilih jurusan yang sesuai dengan minat dan bakat teknologi Anda. Klik tombol pilih jurusan untuk langsung mengisi formulir pendaftaran.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-7">
+
+          <!-- JURUSAN 1: RPL -->
+          <article class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-5">
+                <span class="px-3 py-1 rounded-xl bg-red-50 text-telkomRed font-display font-extrabold text-sm">
+                  RPL
+                </span>
+                <div class="w-11 h-11 rounded-2xl bg-slate-100 text-telkomDark flex items-center justify-center">
+                  <i data-lucide="code-2" class="w-5 h-5"></i>
+                </div>
+              </div>
+
+              <h3 class="font-display text-xl font-extrabold text-telkomDark">
+                Rekayasa Perangkat Lunak
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                Mempelajari perancangan, pengembangan, pengujian, dan pemeliharaan aplikasi berbasis web, mobile, serta sistem informasi modern menggunakan standar industri perangkat lunak.
+              </p>
+
+              <div class="mt-5">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Materi &amp; Fokus Keahlian</p>
+                <ul class="space-y-2 text-sm text-slate-700">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Web &amp; Mobile App Development</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Basis Data, API &amp; Arsitektur Perangkat Lunak</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>UI/UX Dasar &amp; Version Control (Git)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <button
+                type="button"
+                onclick="selectMajorAndScroll('RPL')"
+                class="w-full py-3 px-4 rounded-xl bg-telkomDark hover:bg-telkomRed text-white font-bold text-sm flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <span>Daftar Jurusan RPL</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- JURUSAN 2: TKJ -->
+          <article class="bg-white rounded-3xl p-6 sm:p-7 border-2 border-telkomRed/30 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-5">
+                <span class="px-3 py-1 rounded-xl bg-telkomRed text-white font-display font-extrabold text-sm">
+                  TKJ
+                </span>
+                <div class="w-11 h-11 rounded-2xl bg-red-50 text-telkomRed flex items-center justify-center">
+                  <i data-lucide="network" class="w-5 h-5"></i>
+                </div>
+              </div>
+
+              <h3 class="font-display text-xl font-extrabold text-telkomDark">
+                Teknik Komputer dan Jaringan
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                Membekali siswa keahlian merancang, mengonfigurasi, mengelola, dan mengamankan infrastruktur jaringan komputer, server, serta layanan konektivitas modern.
+              </p>
+
+              <div class="mt-5">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Materi &amp; Fokus Keahlian</p>
+                <ul class="space-y-2 text-sm text-slate-700">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Routing, Switching &amp; Administrasi Jaringan</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Manajemen Server, Virtualisasi &amp; Cloud Dasar</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Keamanan Jaringan &amp; Troubleshooting Perangkat</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <button
+                type="button"
+                onclick="selectMajorAndScroll('TKJ')"
+                class="w-full py-3 px-4 rounded-xl bg-telkomRed hover:bg-red-700 text-white font-bold text-sm flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <span>Daftar Jurusan TKJ</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- JURUSAN 3: PG -->
+          <article class="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-3 mb-5">
+                <span class="px-3 py-1 rounded-xl bg-red-50 text-telkomRed font-display font-extrabold text-sm">
+                  PG
+                </span>
+                <div class="w-11 h-11 rounded-2xl bg-slate-100 text-telkomDark flex items-center justify-center">
+                  <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+                </div>
+              </div>
+
+              <h3 class="font-display text-xl font-extrabold text-telkomDark">
+                Perangkat Gim (Game Development)
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                Menggabungkan logika pemrograman, desain mekanik permainan, aset visual 2D/3D, serta animasi interaktif untuk menciptakan produk gim kreatif dan edukatif.
+              </p>
+
+              <div class="mt-5">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Materi &amp; Fokus Keahlian</p>
+                <ul class="space-y-2 text-sm text-slate-700">
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Game Programming, Gameplay &amp; Level Design</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Pembuatan Aset 2D/3D, Animasi &amp; Audio Gim</span>
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-telkomRed shrink-0"></i>
+                    <span>Pengujian, Optimasi &amp; Publikasi Proyek Gim</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-100">
+              <button
+                type="button"
+                onclick="selectMajorAndScroll('PG')"
+                class="w-full py-3 px-4 rounded-xl bg-telkomDark hover:bg-telkomRed text-white font-bold text-sm flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <span>Daftar Jurusan PG</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- 6. FORMULIR PENDAFTARAN SISWA BARU (PPDB)                             -->
+    <!-- ===================================================================== -->
+    <section id="pendaftaran" class="py-16 sm:py-20 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="inline-block px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold uppercase tracking-wider mb-3">
+            Registrasi Online
+          </span>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-telkomDark tracking-tight">
+            Formulir Pendaftaran Siswa Baru
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-2">
+            Lengkapi data calon siswa dengan benar dan pilih program keahlian yang diminati.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm">
+          <form id="ppdbForm" onsubmit="handleRegistrationSubmit(event)" novalidate class="space-y-6">
+
+            <!-- Baris 1: Nama Lengkap & Asal Sekolah -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="namaLengkap" class="block text-sm font-bold text-telkomDark mb-2">
+                  Nama Lengkap Calon Siswa <span class="text-telkomRed">*</span>
+                </label>
+                <input
+                  id="namaLengkap"
+                  name="namaLengkap"
+                  type="text"
+                  required
+                  placeholder="Contoh: Rafi Pratama Wijaya"
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm text-telkomDark placeholder-slate-400 focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition"
+                />
+                <p id="err-namaLengkap" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+              </div>
+
+              <div>
+                <label for="asalSekolah" class="block text-sm font-bold text-telkomDark mb-2">
+                  Asal Sekolah (SMP / MTs) <span class="text-telkomRed">*</span>
+                </label>
+                <input
+                  id="asalSekolah"
+                  name="asalSekolah"
+                  type="text"
+                  required
+                  placeholder="Contoh: SMP Negeri 4"
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm text-telkomDark placeholder-slate-400 focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition"
+                />
+                <p id="err-asalSekolah" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+              </div>
+            </div>
+
+            <!-- Baris 2: Email & Nomor HP/WA -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="emailSiswa" class="block text-sm font-bold text-telkomDark mb-2">
+                  Alamat Email Aktif <span class="text-telkomRed">*</span>
+                </label>
+                <input
+                  id="emailSiswa"
+                  name="emailSiswa"
+                  type="email"
+                  required
+                  placeholder="contoh: rafi.wijaya@email.com"
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm text-telkomDark placeholder-slate-400 focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition"
+                />
+                <p id="err-emailSiswa" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+              </div>
+
+              <div>
+                <label for="nomorHp" class="block text-sm font-bold text-telkomDark mb-2">
+                  Nomor Telepon / WhatsApp <span class="text-telkomRed">*</span>
+                </label>
+                <input
+                  id="nomorHp"
+                  name="nomorHp"
+                  type="tel"
+                  required
+                  placeholder="Contoh: 081234567890"
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm text-telkomDark placeholder-slate-400 focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition"
+                />
+                <p id="err-nomorHp" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+              </div>
+            </div>
+
+            <!-- Baris 3: Pilihan Jurusan Utama & Cadangan -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="pilihanJurusan" class="block text-sm font-bold text-telkomDark mb-2">
+                  Pilihan Jurusan Utama <span class="text-telkomRed">*</span>
+                </label>
+                <select
+                  id="pilihanJurusan"
+                  name="pilihanJurusan"
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm font-medium text-telkomDark focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition cursor-pointer"
+                >
+                  <option value="">-- Pilih Jurusan Utama --</option>
+                  <option value="RPL">RPL — Rekayasa Perangkat Lunak</option>
+                  <option value="TKJ">TKJ — Teknik Komputer dan Jaringan</option>
+                  <option value="PG">PG — Perangkat Gim (Game Development)</option>
+                </select>
+                <p id="err-pilihanJurusan" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+              </div>
+
+              <div>
+                <label for="pilihanCadangan" class="block text-sm font-bold text-telkomDark mb-2">
+                  Pilihan Jurusan Cadangan
+                </label>
+                <select
+                  id="pilihanCadangan"
+                  name="pilihanCadangan"
+                  class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm font-medium text-telkomDark focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition cursor-pointer"
+                >
+                  <option value="">-- Opsional --</option>
+                  <option value="RPL">RPL — Rekayasa Perangkat Lunak</option>
+                  <option value="TKJ">TKJ — Teknik Komputer dan Jaringan</option>
+                  <option value="PG">PG — Perangkat Gim (Game Development)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Baris 4: Alamat Domisili -->
+            <div>
+              <label for="alamatDomisili" class="block text-sm font-bold text-telkomDark mb-2">
+                Alamat Domisili <span class="text-telkomRed">*</span>
+              </label>
+              <textarea
+                id="alamatDomisili"
+                name="alamatDomisili"
+                rows="3"
+                required
+                placeholder="Tuliskan alamat tempat tinggal lengkap (jalan, nomor rumah, kelurahan/kecamatan, kota)"
+                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm text-telkomDark placeholder-slate-400 focus:outline-none focus:border-telkomRed focus:ring-2 focus:ring-telkomRed/20 transition"
+              ></textarea>
+              <p id="err-alamatDomisili" class="hidden text-xs font-semibold text-red-600 mt-1.5"></p>
+            </div>
+
+            <!-- Persetujuan Data -->
+            <div class="flex items-start gap-3">
+              <input
+                id="persetujuanData"
+                name="persetujuanData"
+                type="checkbox"
+                required
+                class="mt-1 w-4 h-4 rounded border-slate-300 text-telkomRed focus:ring-telkomRed cursor-pointer"
+              />
+              <label for="persetujuanData" class="text-xs sm:text-sm text-slate-600 leading-relaxed cursor-pointer">
+                Saya menyatakan bahwa data pendaftaran yang diisi adalah benar dan bersedia mengikuti alur informasi seleksi PPDB SMK Telkom.
+              </label>
+            </div>
+            <p id="err-persetujuanData" class="hidden text-xs font-semibold text-red-600 -mt-3"></p>
+
+            <!-- Tombol Kirim & Reset -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2">
+              <button
+                type="reset"
+                onclick="clearFormErrors()"
+                class="px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm transition cursor-pointer"
+              >
+                Reset Formulir
+              </button>
+              <button
+                type="submit"
+                class="px-7 py-3.5 rounded-xl bg-telkomRed hover:bg-red-700 text-white font-bold text-sm sm:text-base shadow-md shadow-telkomRed/25 inline-flex items-center justify-center gap-2 transition active:scale-[0.99] cursor-pointer"
+              >
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Kirim Pendaftaran</span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER                                                                -->
+  <!-- ===================================================================== -->
+  <footer class="bg-slate-950 text-slate-400 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+      <div class="flex items-center gap-2.5 text-white font-display font-bold">
+        <span class="w-7 h-7 rounded-lg bg-telkomRed text-white flex items-center justify-center text-xs font-extrabold">T</span>
+        <span>SMK <span class="text-red-400">TELKOM</span> • Portal PPDB</span>
+      </div>
+      <p class="text-center sm:text-right">
+        &copy; <span id="currentYear"></span> SMK Telkom. Seluruh hak cipta dilindungi.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL KONFIRMASI PENDAFTARAN                                          -->
+  <!-- ===================================================================== -->
+  <div
+    id="confirmationModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/65 backdrop-blur-xs"
+  >
+    <div class="bg-white text-telkomDark rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 animate-fade-up">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">Pendaftaran Tercatat</span>
+            <h3 id="modalTitle" class="font-display text-lg sm:text-xl font-extrabold text-telkomDark">
+              Konfirmasi Pendaftaran PPDB
+            </h3>
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="closeConfirmationModal()"
+          aria-label="Tutup Konfirmasi"
+          class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="confirmationDetails" class="my-5 space-y-2.5 text-sm bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
+        <!-- Detail pendaftaran diisi oleh JavaScript -->
+      </div>
+
+      <p class="text-xs text-slate-500 leading-relaxed mb-6">
+        Simpan nomor registrasi di atas. Tim panitia PPDB SMK Telkom akan menghubungi kontak yang tercantum untuk informasi tahap berikutnya.
+      </p>
+
+      <div class="flex justify-end">
+        <button
+          type="button"
+          onclick="closeConfirmationModal()"
+          class="px-6 py-2.5 rounded-xl bg-telkomRed hover:bg-red-700 text-white font-bold text-sm transition cursor-pointer"
+        >
+          Selesai
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT INTERAKTIVITAS                                             -->
+  <!-- ===================================================================== -->
+  <script>
+    // Data prestasi & lomba siswa SMK Telkom
+    const ACHIEVEMENTS = [
+      {
+        id: 1,
+        title: 'Juara 1 Lomba Pengembangan Aplikasi Web Siswa',
+        category: 'Akademik & Lomba',
+        badge: 'Tingkat Provinsi',
+        year: '2026',
+        description: 'Merancang aplikasi layanan publik berbasis web yang responsif, aman, dan mudah diakses masyarakat.',
+      },
+      {
+        id: 2,
+        title: 'Juara 2 Kompetisi Jaringan Komputer & Keamanan Siber',
+        category: 'Akademik & Lomba',
+        badge: 'Tingkat Nasional',
+        year: '2025',
+        description: 'Berhasil menyelesaikan tantangan konfigurasi routing, manajemen server, serta mitigasi gangguan jaringan.',
+      },
+      {
+        id: 3,
+        title: 'Finalis Terbaik Kompetisi Pembuatan Gim Edukasi',
+        category: 'Akademik & Lomba',
+        badge: 'Tingkat Nasional',
+        year: '2025',
+        description: 'Mengembangkan gim interaktif bertema literasi digital dengan alur permainan menarik dan aset visual orisinal.',
+      },
+      {
+        id: 4,
+        title: 'Juara 1 Olimpiade Sains & Logika Informatika',
+        category: 'Akademik & Lomba',
+        badge: 'Tingkat Kota/Kab.',
+        year: '2025',
+        description: 'Menunjukkan ketajaman pemecahan masalah algoritmik dan logika komputasi pada seleksi tingkat pelajar.',
+      },
+      {
+        id: 5,
+        title: 'Juara 1 Turnamen Futsal Pelajar Antar-SMK',
+        category: 'Non-Akademik',
+        badge: 'Tingkat Kota/Kab.',
+        year: '2026',
+        description: 'Menampilkan kekompakan tim, sportivitas tinggi, serta stamina prima sepanjang turnamen antarsekolah.',
+      },
+      {
+        id: 6,
+        title: 'Juara 2 Festival Seni, Musik & Kreasi Pelajar',
+        category: 'Non-Akademik',
+        badge: 'Tingkat Provinsi',
+        year: '2025',
+        description: 'Menghadirkan penampilan kreatif siswa yang memadukan aransemen musik modern dan tata panggung menarik.',
+      },
+    ];
+
+    // Label lengkap nama jurusan
+    const MAJOR_LABELS = {
+      RPL: 'RPL — Rekayasa Perangkat Lunak',
+      TKJ: 'TKJ — Teknik Komputer dan Jaringan',
+      PG: 'PG — Perangkat Gim (Game Development)',
+    };
+
+    let currentAchievementFilter = 'Semua';
+
+    // Mengatur status aktif tautan navigasi
+    function setActiveNav(sectionKey) {
+      const links = document.querySelectorAll('.nav-link');
+      links.forEach((link) => {
+        const isMatch = link.getAttribute('data-nav') === sectionKey;
+        if (isMatch) {
+          link.classList.add('text-telkomRed', 'bg-red-50');
+          link.classList.remove('text-slate-600', 'text-slate-700');
+        } else {
+          link.classList.remove('text-telkomRed', 'bg-red-50');
+          link.classList.add('text-slate-600');
+        }
+      });
+    }
+
+    // Membuka/menutup menu mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('mobileMenuBtn');
+      const icon = document.getElementById('mobileMenuIcon');
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        icon.setAttribute('data-lucide', 'x');
+      } else {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        icon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
+
+    // Menangani klik navigasi pada menu mobile
+    function handleMobileNavClick(sectionKey) {
+      setActiveNav(sectionKey);
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('mobileMenuBtn');
+      const icon = document.getElementById('mobileMenuIcon');
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      icon.setAttribute('data-lucide', 'menu');
+      lucide.createIcons();
+    }
+
+    // Filter kartu prestasi berdasarkan kategori
+    function filterAchievements(category) {
+      currentAchievementFilter = category;
+
+      const buttons = document.querySelectorAll('.achievement-filter');
+      buttons.forEach((btn) => {
+        const isActive = btn.getAttribute('data-filter') === category;
+        if (isActive) {
+          btn.className = 'achievement-filter px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-telkomRed text-white shadow-xs transition cursor-pointer';
+        } else {
+          btn.className = 'achievement-filter px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 border border-slate-200 hover:border-telkomRed hover:text-telkomRed transition cursor-pointer';
+        }
+      });
+
+      renderAchievements();
+    }
+
+    // Merender daftar kartu prestasi ke dalam DOM
+    function renderAchievements() {
+      const grid = document.getElementById('achievementsGrid');
+      const filtered =
+        currentAchievementFilter === 'Semua'
+          ? ACHIEVEMENTS
+          : ACHIEVEMENTS.filter((item) => item.category === currentAchievementFilter);
+
+      grid.innerHTML = filtered
+        .map((item) => {
+          const iconName = item.category === 'Non-Akademik' ? 'medal' : 'trophy';
+          return `
+            <article class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-xs hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-telkomRed text-xs font-bold">
+                    <i data-lucide="${iconName}" class="w-3.5 h-3.5"></i>
+                    <span>${item.category}</span>
+                  </span>
+                  <span class="text-xs font-bold text-slate-400">${item.year}</span>
+                </div>
+
+                <h3 class="font-display text-lg font-extrabold text-telkomDark leading-snug">
+                  ${item.title}
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed mt-2.5">
+                  ${item.description}
+                </p>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="font-semibold text-slate-500">Pencapaian</span>
+                <span class="font-bold text-telkomDark bg-slate-100 px-2.5 py-1 rounded-lg">${item.badge}</span>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+
+      lucide.createIcons();
+    }
+
+    // Memilih jurusan dari kartu jurusan lalu mengarahkan ke formulir pendaftaran
+    function selectMajorAndScroll(majorCode) {
+      const selectEl = document.getElementById('pilihanJurusan');
+      if (selectEl) {
+        selectEl.value = majorCode;
+        clearFieldError('pilihanJurusan');
+      }
+      setActiveNav('pendaftaran');
+      const formSection = document.getElementById('pendaftaran');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Menampilkan pesan error pada field tertentu
+    function setFieldError(fieldId, message) {
+      const errEl = document.getElementById(`err-${fieldId}`);
+      const inputEl = document.getElementById(fieldId);
+      if (errEl) {
+        errEl.textContent = message;
+        errEl.classList.remove('hidden');
+      }
+      if (inputEl && inputEl.type !== 'checkbox') {
+        inputEl.classList.add('border-red-500');
+      }
+    }
+
+    // Menghapus pesan error pada field tertentu
+    function clearFieldError(fieldId) {
+      const errEl = document.getElementById(`err-${fieldId}`);
+      const inputEl = document.getElementById(fieldId);
+      if (errEl) {
+        errEl.textContent = '';
+        errEl.classList.add('hidden');
+      }
+      if (inputEl && inputEl.type !== 'checkbox') {
+        inputEl.classList.remove('border-red-500');
+      }
+    }
+
+    // Membersihkan seluruh error formulir
+    function clearFormErrors() {
+      ['namaLengkap', 'asalSekolah', 'emailSiswa', 'nomorHp', 'pilihanJurusan', 'alamatDomisili', 'persetujuanData'].forEach(
+        clearFieldError
+      );
+    }
+
+    // Validasi dan pengiriman formulir PPDB
+    function handleRegistrationSubmit(event) {
+      event.preventDefault();
+      clearFormErrors();
+
+      const namaLengkap = document.getElementById('namaLengkap').value.trim();
+      const asalSekolah = document.getElementById('asalSekolah').value.trim();
+      const emailSiswa = document.getElementById('emailSiswa').value.trim();
+      const nomorHp = document.getElementById('nomorHp').value.trim();
+      const pilihanJurusan = document.getElementById('pilihanJurusan').value;
+      const pilihanCadangan = document.getElementById('pilihanCadangan').value;
+      const alamatDomisili = document.getElementById('alamatDomisili').value.trim();
+      const persetujuanData = document.getElementById('persetujuanData').checked;
+
+      let isValid = true;
+
+      if (namaLengkap.length < 3) {
+        setFieldError('namaLengkap', 'Masukkan nama lengkap calon siswa minimal 3 karakter.');
+        isValid = false;
+      }
+
+      if (asalSekolah.length < 3) {
+        setFieldError('asalSekolah', 'Masukkan asal sekolah (SMP/MTs) dengan jelas.');
+        isValid = false;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailSiswa)) {
+        setFieldError('emailSiswa', 'Masukkan alamat email yang valid.');
+        isValid = false;
+      }
+
+      const phonePattern = /^[0-9+\-\s]{8,16}$/;
+      if (!phonePattern.test(nomorHp)) {
+        setFieldError('nomorHp', 'Masukkan nomor telepon atau WhatsApp yang valid.');
+        isValid = false;
+      }
+
+      if (!pilihanJurusan) {
+        setFieldError('pilihanJurusan', 'Silakan pilih jurusan utama (RPL, TKJ, atau PG).');
+        isValid = false;
+      }
+
+      if (alamatDomisili.length < 8) {
+        setFieldError('alamatDomisili', 'Tuliskan alamat domisili lengkap minimal 8 karakter.');
+        isValid = false;
+      }
+
+      if (!persetujuanData) {
+        setFieldError('persetujuanData', 'Centang kotak persetujuan sebelum mengirim pendaftaran.');
+        isValid = false;
+      }
+
+      if (!isValid) {
+        return;
+      }
+
+      // Membuat nomor registrasi unik singkat
+      const regNumber = `PPDB-TELKOM-${new Date().getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+
+      const detailsContainer = document.getElementById('confirmationDetails');
+      detailsContainer.innerHTML = `
+        <div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+          <span class="text-slate-500">No. Registrasi</span>
+          <span class="font-display font-extrabold text-telkomRed">${regNumber}</span>
+        </div>
+        <div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+          <span class="text-slate-500">Nama Siswa</span>
+          <span class="font-bold text-telkomDark text-right">${escapeHtml(namaLengkap)}</span>
+        </div>
+        <div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+          <span class="text-slate-500">Asal Sekolah</span>
+          <span class="font-semibold text-telkomDark text-right">${escapeHtml(asalSekolah)}</span>
+        </div>
+        <div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+          <span class="text-slate-500">Jurusan Utama</span>
+          <span class="font-bold text-telkomDark text-right">${MAJOR_LABELS[pilihanJurusan] || pilihanJurusan}</span>
+        </div>
+        ${
+          pilihanCadangan
+            ? `<div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+                 <span class="text-slate-500">Jurusan Cadangan</span>
+                 <span class="font-semibold text-telkomDark text-right">${MAJOR_LABELS[pilihanCadangan] || pilihanCadangan}</span>
+               </div>`
+            : ''
+        }
+        <div class="flex justify-between gap-3 py-1 border-b border-slate-200/70">
+          <span class="text-slate-500">Email / HP</span>
+          <span class="font-semibold text-telkomDark text-right">${escapeHtml(emailSiswa)} • ${escapeHtml(nomorHp)}</span>
+        </div>
+        <div class="pt-1">
+          <span class="text-slate-500 block text-xs mb-0.5">Alamat Domisili</span>
+          <p class="font-medium text-telkomDark text-xs sm:text-sm">${escapeHtml(alamatDomisili)}</p>
+        </div>
+      `;
+
+      openConfirmationModal();
+      document.getElementById('ppdbForm').reset();
+    }
+
+    // Mencegah karakter HTML berbahaya saat menampilkan input pengguna
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Membuka modal konfirmasi pendaftaran
+    function openConfirmationModal() {
+      const modal = document.getElementById('confirmationModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    // Menutup modal konfirmasi pendaftaran
+    function closeConfirmationModal() {
+      const modal = document.getElementById('confirmationModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Inisialisasi halaman saat dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      renderAchievements();
+      lucide.createIcons();
+
+      // Tutup modal jika mengklik area luar kotak modal
+      const modal = document.getElementById('confirmationModal');
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeConfirmationModal();
+        }
+      });
+
+      // Hapus error saat pengguna mulai mengetik atau memilih ulang
+      ['namaLengkap', 'asalSekolah', 'emailSiswa', 'nomorHp', 'pilihanJurusan', 'alamatDomisili', 'persetujuanData'].forEach(
+        (id) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', () => clearFieldError(id));
+            el.addEventListener('change', () => clearFieldError(id));
+          }
+        }
+      );
+    });
+
+    <footer>
+    <p>&copy;Hak cipta sekolah</p>
+  </footer>
+  </script>
+  
+</body>
+</html>
